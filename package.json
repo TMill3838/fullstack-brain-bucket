@@ -1,0 +1,26 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "> [dev project] charlie",
+  "homepage": "https://github.com/barrycumbie/fullstack-brain-bucket#readme",
+  "bugs": {
+    "url": "https://github.com/barrycumbie/fullstack-brain-bucket/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barrycumbie/fullstack-brain-bucket.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module", 
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
