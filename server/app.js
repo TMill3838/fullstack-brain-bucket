@@ -12,12 +12,14 @@ app.use(express.static(join(__dirname, '../public')));
 //   res.send('Hello World')
 // })
 
+//big change
+
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'public', 'index.html'));
 })
 
 app.get('/whatever', (req, res) => {
-  res.send('Hello World whatever')
+  res.send('Omega Supreme')
 })
 
 app.listen(3000, () => {
