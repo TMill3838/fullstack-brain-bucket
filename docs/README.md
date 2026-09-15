@@ -1,5 +1,5 @@
 # Fullstack Web Server Login
-> short app tagline
+
 
 ### authorship + version
 
@@ -10,19 +10,19 @@
 | | |
 | -- | -- |
 | Resource |                     Link |
-| PROD codebase        |        [`main`](https://github.com/TMill3838/fullstack-brain-bucket) |
-|  PROD server          |        [GCP](https://tylan.barrycumbie.com)
+| PROD codebase         |        [`main`](https://github.com/TMill3838/fullstack-brain-bucket) |
+|  PROD server          |        [GCP](https://tylan.barrycumbie.com) |
 |  DEV codebase         |        [`dev`](https://github.com/TMill3838/fullstack-brain-bucket/tree/dev) |
 |  DEV server           |        [Render](https://fullstack-brain-bucket.onrender.com/pages/auth.html) |
 |  docs                 |        [`docs/`](https://github.com/TMill3838/fullstack-brain-bucket/tree/main/docs) |
-|  published docs       |        [GitHub Pages](URL) |
-|  CI/CD workflow       |        [`deploy.yml`](URL) |
-|  successful PROD deployment |  [GitHub Action](URL) |
+|  published docs       |        [GitHub Pages](https://tmill3838.github.io/fullstack-brain-bucket/) |
+|  CI/CD workflow       |        [`deploy.yml`](https://github.com/TMill3838/fullstack-brain-bucket/blob/main/.github/workflows/deploy-main-to-gcp.yml) |
+|  successful PROD deployment |  [GitHub Action](https://github.com/TMill3838/fullstack-brain-bucket/actions/runs/35006171970/job/104506351184) |
 |  resolved GOLF issue  |        [issue Permission Denied\1](https://github.com/TMill3838/fullstack-brain-bucket/issues/1) |
 
 ### user story
 
-- **As a** burgeoning full-stack developer,
+- **As a** senior student of University of North Alabama,
 - **I want** a CI/CD infrastructure
 - **so that** I can develop locally, manage my code in GitHub, and
     automatically deploy changes to DEV and PROD environments.
