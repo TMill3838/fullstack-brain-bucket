@@ -5,21 +5,19 @@
 
 `@TMill3838` \| `2026-09-14` \| `GOLF`
 
-test run iii
-
 ### deployments, codebase, & repo features 
 
   resource                     link
   ---------------------------- ----------------------
   PROD codebase                [`main`](URL)
   PROD server                  [GCP](URL)
-  DEV codebase                 [`dev`](URL)
-  DEV server                   [Render](URL)
-  docs                         [`docs/`](URL)
+  DEV codebase                 [`dev`](https://github.com/TMill3838/fullstack-brain-bucket/tree/dev)
+  DEV server                   [Render](https://fullstack-brain-bucket.onrender.com/pages/auth.html)
+  docs                         [`docs/`](https://github.com/TMill3838/fullstack-brain-bucket/tree/main/docs)
   published docs               [GitHub Pages](URL)
   CI/CD workflow               [`deploy.yml`](URL)
   successful PROD deployment   [GitHub Action](URL)
-  resolved GOLF issue          [issue \#](URL)
+  resolved GOLF issue          [issue Permission Denied\1](https://github.com/TMill3838/fullstack-brain-bucket/issues/1)
 
 ### user story
 
