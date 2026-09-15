@@ -29,7 +29,7 @@
 
 ### narrative
 
-A fullstack web application that is managed trhaough a dual development a CI/CD pipeline. Development code is pshed from the dev branch with is ran on Render. Production releases are then pushed to main where it is deployed on a Linux based server via Google Cloud.
+A fullstack web application that is managed trhaough a dual development a CI/CD pipeline. Development code is pshed from the dev branch with is ran on Render. Production releases are then pushed to main where it is deployed on a Linux based server via Google Cloud Platform virtual machine.
 
 ### architecture
 
