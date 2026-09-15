@@ -11,7 +11,7 @@
 | -- | -- |
 | Resource |                     Link |
 | PROD codebase        |        [`main`](https://github.com/TMill3838/fullstack-brain-bucket) |
-|  PROD server          |        [GCP](URL)
+|  PROD server          |        [GCP](https://tylan.barrycumbie.com)
 |  DEV codebase         |        [`dev`](https://github.com/TMill3838/fullstack-brain-bucket/tree/dev) |
 |  DEV server           |        [Render](https://fullstack-brain-bucket.onrender.com/pages/auth.html) |
 |  docs                 |        [`docs/`](https://github.com/TMill3838/fullstack-brain-bucket/tree/main/docs) |
