@@ -1,6 +1,10 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
-
 import 'dotenv/config';
+
+import express from 'express'
+const app = express();
+
+
 //const { MongoClient, ServerApiVersion } = require('mongodb');
 
 
@@ -28,3 +32,26 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
+app.get('/api/hello', function (req, res) {
+
+  //const message = 'hello from the server as a variable'
+
+  const message = {
+    message: 'Hello from hard code json',
+    success: 'true'
+
+  }
+  res.json(message);
+
+
+  res.send(
+    'hello from the server'
+  );
+
+}
+);
+
+app.listen(5500, () => {
+  console.log('Server is running on http://localhost:5500')
+})
