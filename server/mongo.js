@@ -1,9 +1,14 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import 'dotenv/config';
 
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
 import express from 'express'
 const app = express();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //const { MongoClient, ServerApiVersion } = require('mongodb');
 
@@ -18,6 +23,16 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
+
+app.use(express.static(join(__dirname, '../public')));
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World')
+// })
+
+app.get('/', (req, res) => {
+  res.sendFile(join(__dirname, '../public', 'hotel.html'));
+})
 
 async function run() {
   try {
