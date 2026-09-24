@@ -25,6 +25,8 @@ const client = new MongoClient(uri, {
 });
 
 app.use(express.static(join(__dirname, '../public')));
+app.use( express.json());
+
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World')
@@ -64,8 +66,45 @@ app.get('/api/hello', function (req, res) {
     'hello from the server'
   );
 
+  app.post(
+  '/api/students',
+  function(req, res) {
+
+    console.log(
+      req.body
+    );
+
+    res.json({
+
+      received:
+        req.body
+
+    });
+
+  }
+);
+
 }
 );
+
+app.post(
+  '/api/students',
+  function(req, res) {
+
+    console.log(
+      req.body
+    );
+
+    res.json({
+
+      received:
+        req.body
+
+    });
+
+  }
+);
+
 
 app.listen(5500, () => {
   console.log('Server is running on http://localhost:5500')
