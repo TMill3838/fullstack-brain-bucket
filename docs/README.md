@@ -1,4 +1,5 @@
 # Fullstack Web Server Login
+with added decepticon database
 
 
 ### authorship + version
@@ -29,7 +30,7 @@
 
 ### narrative
 
-A fullstack web application that is managed trhaough a dual development a CI/CD pipeline. Development code is pshed from the dev branch with is ran on Render. Production releases are then pushed to main where it is deployed on a Linux based server via Google Cloud Platform virtual machine.
+A fullstack web application that is managed through a dual development a CI/CD pipeline. Development code is pushed from the dev branch with is ran on Render. Production releases are then pushed to main where it is deployed on a Linux based server via Google Cloud Platform virtual machine.
 
 ### architecture
 
@@ -47,7 +48,7 @@ GitHub
 ### stack
 
 `HTML/CSS/JS` \| `Node.js` \| `Express` \| `Git/GitHub` \| `Render` \|
-`GCP` \| `Linux` \| `Nginx` \| `PM2` \| `Certbot` \| `GitHub Actions`
+`GCP` \| `Linux` \| `Nginx` \| `PM2` \| `Certbot` \| `GitHub Actions` | `MongoDB`
 
 ### project structure
 
