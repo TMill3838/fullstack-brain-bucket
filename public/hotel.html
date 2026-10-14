@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>
+    Decepticon Database
+  </title>
+</head>
+
+<body>
+
+  <div id="iss07">
+  <hr>
+  <h1>Seed Database</h1>
+  <button id="seedBtn">Seed Decepticons</button>
+  <p id="message07"></p>
+
+  <script>
+    document.querySelector('#seedBtn').addEventListener('click', seedDatabase);
+
+    function seedDatabase() {
+      fetch('/api/dev/seed', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector('#message07').textContent = 'Decepticon data seeded!';
+        });
+    }
+  </script>
+</div>
+  
+  <div id="iss08">
+    <h1>Display All Decepticons</h1>
+
+    <button id="getAll"> get all</button>
+
+    <pre id="output08"></pre>
+
+    <script>
+
+      document
+        .querySelector('#getAll')
+        .addEventListener(
+          'click',
+          getAll
+        );
+
+      async function getAll() {
+
+        const response =
+          await fetch(
+            '/api/items'
+          );
+
+        const data =
+          await response.json();
+
+        document
+          .querySelector('#output08')
+          .textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+
+      }
+
+    </script>
+  </div>
+
+  <div id="iss11">
+    <h1>iss11. Insert Decepticon Data</h1>
+    <button id="createItem">create decepticon data</button>
+    <pre id="output11"></pre>
+
+    <script>
+
+      document.querySelector('#createItem').addEventListener('click', createItem);
+
+      async function createItem() {
+
+        const newItem = {
+          name: 'Blank',
+          altMode: 'blank',
+          wikiLink: ' '
+        };
+
+        const response = await fetch('/api/items', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newItem)
+        });
+
+        const data = await response.json();
+
+        document.querySelector('#output11').textContent =
+          JSON.stringify(data, null, 2);
+      }
+    </script>
+  </div>
+
+  <div class="iss12">
+
+    <h1>iss12. update category</h1>
+    <input id="updatedId" placeholder="Enter Decepticon ID">
+    <input id="newName" placeholder="Update Decepticon Name">
+    <input id="newAltMode" placeholder="update alt mode">
+    <input id="newWiki" placeholder="Update Wiki Link">
+    <button id="updateDecData">update Decepticon Data</button>
+    <pre id="output12"></pre>
+
+    <script>
+      document.querySelector('#updateDecData').addEventListener('click', updateDecepticons);
+
+      async function updateDecepticons() {
+        
+        const id = document.querySelector('#updatedId').value;
+
+        const nameValue = document.querySelector('#newName').value;
+        const altModeValue = document.querySelector('#newAltMode').value;
+        const wikiValue = document.querySelector("#newWiki").value;
+
+        const changes = {};
+        if (nameValue !== "") { changes.name = nameValue; }
+        if (altModeValue !== "") { changes.altMode = altModeValue; }
+        if (wikiValue !== "") { changes.wikiLink = wikiValue; }
+
+        const response = await fetch(`/api/items/${id}`,
+          {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(changes)
+          });
+
+        const data = await response.json();
+
+        document.querySelector('#output12').textContent =
+          JSON.stringify(data, null, 2);
+      };
+
+
+    </script>
+
+  </div>
+
+  <div id="iss20">
+    <h1>iss13. delete one</h1>
+    <input id="deleteId" placeholder="Enter Decepticon ID">
+    <button id="deleteItem">delete decepticon data</button>
+    <pre id="output13"></pre>
+
+    <script>
+      document.querySelector('#deleteItem').addEventListener('click', deleteItem);
+
+      async function deleteItem() {
+        const id = document.querySelector('#deleteId').value;
+        const response = await fetch(`/api/items/${id}`, { method: 'DELETE' });
+        const data = await response.json();
+        document.querySelector('#output13').textContent = JSON.stringify(data, null, 2);
+      };
+    </script>
+
+
+  </div>
+
+
+  <div id="iss15">
+    <h1>issue 15</h1>
+    <pre>
+username
+email
+password
+<pre>
+<button id="createAccount">create acct</button>
+<pre id="output15"></pre>
+
+
+    <script>
+      // stole from iss 2 
+
+      document.querySelector('#createAccount').addEventListener('click', sendData);
+
+      async function sendData() {
+
+        const acct = {
+          "username": "bcumbie",
+          "email": "bcumbie@example.com",
+          "password": "tacos123"
+        };
+
+        const response =
+          await fetch(
+            '/api/create-account',
+            {
+              method:
+                'POST',
+              headers: {
+                'Content-Type':
+                  'application/json'
+              },
+              body:
+                JSON.stringify(
+                  acct
+                )
+            }
+          );
+
+        const data =
+          await response.json();
+
+        console.log(data);
+
+        document.querySelector('#output12').textContent =
+          JSON.stringify(data, null, 2);
+
+      }
+
+
+    </script>
+
+  </div>
+</body>
+
+</html>
