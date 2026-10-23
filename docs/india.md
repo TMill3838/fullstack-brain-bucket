@@ -2,7 +2,7 @@
 
 ## 1. WHO — User + Project
 
-* **Project:** **Transfomrers Collection Arhcive** — (Name subjected to change) A curated, visual database and digital showcase for cataloging and displaying a personal Transformers collection across all eras and factions that I currently have.
+* **Project:** **Transformers Collection Archive** — (Name subjected to change) A curated, visual database and digital showcase for cataloging and displaying a personal Transformers collection across all eras and factions that I currently have.
 * **Developer:** Tylan Miller — UNA IT Cybersecurity Major 
 * **Specific User / Audience:**
   * **Primary User (Curator/Admin):** A dedicated Transformers collector who wants a central, self-managed database to upload, edit, and organize their personal figures across different continuities (G1, Beast Wars, Live-Action, Collabs, and More) without relying on cluttered third-party spreadsheets or rigid community wikis.
@@ -16,7 +16,7 @@
 ## 2. WHY — Problem + Value
 
 * **Problem / Opportunity:** Most existing toy databases are either sprawling crowd-sourced encyclopedias cluttered with ads and aftermarket price charts, or plain spreadsheets that lack visual appeal. Furthermore, evolving my earlier *Decepticon Database* requires expanding beyond a single faction and moving from a raw functional CRUD setup to a polished, neutral-toned Transformers showcase capable of dynamically rendering figure photography.
-* **Value Proposition:** *For a dedicated Transformers collector, Cybertron Archive provides a customizable, full-stack digital showcase because it combines a working CRUD database backend with a clean, faction-neutral UI Designed specifically to highlight personal figure photography and character specs.*
+* **Value Proposition:** *For a dedicated Transformers collector, this archive provides a customizable, full-stack digital showcase because it combines a working CRUD database backend with a clean, faction-neutral UI Designed specifically to highlight personal figure photography and character specs.*
 
 ---
 
@@ -27,7 +27,7 @@
 | **[Transformerland](https://www.transformerland.com/)** | Massive identification guide with comprehensive series/year breakdowns. | Dated early-2000s layout; designed primarily as an online store rather than a personal display. | Server-rendered catalog, query filters, static image hosting. | **Borrow:** Era and continuity categorization. **Avoid:** Cluttered storefront UI. |
 | **[TFWiki.net](https://tfwiki.net/)** | Deepest lore and release documentation available. | MediaWiki text walls; not built for personal inventory or visual card galleries. | MediaWiki (PHP), public read access, heavy cross-linking. | **Borrow:** Faction/sub-group taxonomy. **Avoid:** Wall-of-text encyclopedia layout. |
 | **[ActionFigure411](https://www.actionfigure411.com/)** | Fast visual checklists and mobile-friendly grid views. | Focused heavily on resale/eBay pricing; limited depth for older or obscure Transformers lines. | OAuth accounts, responsive grids, third-party API integrations. | **Borrow:** Clean card grid scanning. **Avoid:** Cluttering cards with price graphs. |
-| **Previous *[Decepticon Database]()*** | Working data structure and core CRUD logic already proven. | Locked into a single-faction theme; currently lacks a polished UI and dynamic image loading. | Web forms, CRUD endpoints, custom CSS. | **Borrow:** Core CRUD structure. **Avoid:** Hardcoded single-faction styling. |
+| **Previous *[Decepticon Database](https://github.com/TMill3838/decepticon-database)*** | Working data structure and core CRUD logic already proven. | Locked into a single-faction theme; currently lacks a polished UI and dynamic image loading. | Web forms, CRUD endpoints, custom CSS. | **Borrow:** Core CRUD structure. **Avoid:** Hardcoded single-faction styling. |
 
 * **Why build another one?** None of the existing platforms give a collector full ownership over both the database schema and the visual gallery experience. Upgrading my existing CRUD foundation into a unified, faction-neutral showcase lets me control exactly what information and photos are displayed. Existing platforms also have a dull and less appealing design.
 
@@ -57,7 +57,7 @@ At **KILO**, we should be able to demonstrate that:
   * **Backlog / Issues:** [Issues](https://github.com/TMill3838/fullstack-brain-bucket/issues?q=is%3Aissue+state%3Aopen)
   * **Milestones:** [Milestones](https://github.com/TMill3838/fullstack-brain-bucket/milestones)
   * **DEV Repository:** [Repo](https://github.com/TMill3838/fullstack-brain-bucket)
-  * **Production URL:** [Production]
+  * **Production URL:** Currently Not Working
 
 ---
 
