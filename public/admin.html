@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Curator Portal — Transformers Archive</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .file-upload-box {
+      background-color: var(--bg-input);
+      border: 1px dashed var(--border-metal);
+      padding: 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .file-upload-box label {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--cybertron-accent);
+      font-weight: bold;
+    }
+    .img-preview {
+      max-height: 90px;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-metal);
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Transformers Archive — Admin Portal</h1>
+    <nav>
+      <a href="hotel.html">Showcase Gallery</a>
+      <a href="admin.html" class="active">Admin Portal</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Current Database Inventory Table -->
+    <div class="panel" style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Current Database Records</h2>
+        <div>
+          <button id="seedBtn">Seed Starter Data</button>
+          <button onclick="loadInventoryTable()">Refresh Table</button>
+        </div>
+      </div>
+      <p id="message07" class="meta-text" style="margin-top: 0.4rem;"></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Faction</th>
+            <th>Series</th>
+            <th>Alt Mode</th>
+            <th>Database ID</th>
+            <th>Quick Action</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryBody">
+          <tr><td colspan="6">Loading records...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CRUD Forms Grid -->
+    <div class="admin-grid">
+
+      <!-- CREATE (iss11) -->
+      <div class="panel" id="iss11">
+        <h2>Add New Figure (Create)</h2>
+        <div class="form-group">
+          <input id="createName" placeholder="Character Name (e.g., Optimus Prime)">
+          <select id="createFaction">
+            <option value="Autobot">Autobot</option>
+            <option value="Decepticon">Decepticon</option>
+            <option value="Maximal">Maximal</option>
+            <option value="Predacon">Predacon</option>
+          </select>
+          <input id="createSeries" placeholder="Series / Era (e.g., G1, Beast Wars, Legacy)">
+          <input id="createAltMode" placeholder="Alt Mode (e.g., Semi-Truck, Fighter Jet)">
+
+          <!-- File Picker OR Image URL -->
+          <div class="file-upload-box">
+            <label for="createFile">Upload Photo from Device:</label>
+            <input type="file" id="createFile" accept="image/*">
+            <img id="createPreview" class="img-preview" alt="Preview">
+          </div>
+          <input id="createImage" placeholder="OR paste a Photo URL / path">
+          <input id="createWiki" placeholder="TFWiki Link (optional)">
+        </div>
+        <button id="createItem" class="primary">Upload Figure to Archive</button>
+        <pre id="output11" class="status-box">Ready to add...</pre>
+      </div>
+
+      <!-- UPDATE (iss12) -->
+      <div class="panel" id="iss12">
+        <h2>Edit Figure (Update)</h2>
+        <div class="form-group">
+          <input id="updatedId" placeholder="Enter or Select Figure ID">
+          <input id="newName" placeholder="Update Name (leave blank to keep)">
+          <select id="newFaction">
+            <option value="">-- Keep Current Faction --</option>
+            <option value="Autobot">Autobot</option>
+            <option value="Decepticon">Decepticon</option>
+            <option value="Maximal">Maximal</option>
+            <option value="Predacon">Predacon</option>
+          </select>
+          <input id="newSeries" placeholder="Update Series / Era">
+          <input id="newAltMode" placeholder="Update Alt Mode">
+
+          <!-- File Picker OR Image URL -->
+          <div class="file-upload-box">
+            <label for="updateFile">Upload New Photo from Device:</label>
+            <input type="file" id="updateFile" accept="image/*">
+            <img id="updatePreview" class="img-preview" alt="Preview">
+          </div>
+          <input id="newImage" placeholder="OR paste new Photo URL">
+          <input id="newWiki" placeholder="Update TFWiki Link">
+        </div>
+        <button id="updateDecData" class="primary">Update Figure Data</button>
+        <pre id="output12" class="status-box">Ready to update...</pre>
+      </div>
+
+      <!-- DELETE (iss13 / iss20) -->
+      <div class="panel" id="iss20">
+        <h2>Remove Figure (Delete)</h2>
+        <div class="form-group">
+          <input id="deleteId" placeholder="Enter or Select Figure ID">
+        </div>
+        <button id="deleteItem" class="danger">Delete Figure Record</button>
+        <pre id="output13" class="status-box">Ready to delete...</pre>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    let createBase64Image = "";
+    let updateBase64Image = "";
+
+    // Convert any selected image file into a Base64 string
+    function setupFileReader(fileInputId, previewImgId, callback) {
+      document.querySelector(fileInputId).addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        const preview = document.querySelector(previewImgId);
+
+        if (!file) {
+          preview.style.display = 'none';
+          callback("");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const base64String = event.target.result;
+          preview.src = base64String;
+          preview.style.display = 'block';
+          callback(base64String);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    setupFileReader('#createFile', '#createPreview', (data) => { createBase64Image = data; });
+    setupFileReader('#updateFile', '#updatePreview', (data) => { updateBase64Image = data; });
+
+    // Load Inventory Table and allow one-click ID autofill
+    async function loadInventoryTable() {
+      const response = await fetch('/api/items');
+      const items = await response.json();
+      const tbody = document.querySelector('#inventoryBody');
+      tbody.innerHTML = '';
+
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${item.name || 'Blank'}</strong></td>
+          <td>${item.faction || 'Decepticon'}</td>
+          <td>${item.series || 'G1'}</td>
+          <td>${item.altMode || '-'}</td>
+          <td><code>${item._id}</code></td>
+          <td>
+            <button onclick="selectId('${item._id}', '${item.name || ''}')">Select ID</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function selectId(id, name) {
+      document.querySelector('#updatedId').value = id;
+      document.querySelector('#deleteId').value = id;
+      document.querySelector('#output12').textContent = `Selected ${name} (${id}) for editing.`;
+      document.querySelector('#output13').textContent = `Selected ${name} (${id}) for deletion.`;
+    }
+
+    // Seed Database (iss07)
+    document.querySelector('#seedBtn').addEventListener('click', async () => {
+      const response = await fetch('/api/dev/seed', { method: 'POST' });
+      await response.json();
+      document.querySelector('#message07').textContent = 'Starter collection data seeded!';
+      loadInventoryTable();
+    });
+
+    // Create Figure (iss11) — prioritizes uploaded file over URL text box
+    document.querySelector('#createItem').addEventListener('click', async () => {
+      const chosenImage = createBase64Image || document.querySelector('#createImage').value.trim();
+
+      const newItem = {
+        name: document.querySelector('#createName').value || 'Unnamed Transformer',
+        faction: document.querySelector('#createFaction').value,
+        series: document.querySelector('#createSeries').value || 'G1',
+        altMode: document.querySelector('#createAltMode').value || 'Unknown',
+        image: chosenImage,
+        wikiLink: document.querySelector('#createWiki').value
+      };
+
+      const response = await fetch('/api/items', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newItem)
+      });
+
+      const data = await response.json();
+      document.querySelector('#output11').textContent = JSON.stringify(data, null, 2);
+
+      // Reset file input after upload
+      document.querySelector('#createFile').value = '';
+      document.querySelector('#createPreview').style.display = 'none';
+      createBase64Image = '';
+      loadInventoryTable();
+    });
+
+    // Update Figure (iss12)
+    document.querySelector('#updateDecData').addEventListener('click', async () => {
+      const id = document.querySelector('#updatedId').value.trim();
+      if (!id) {
+        document.querySelector('#output12').textContent = 'Please enter or select a Figure ID first.';
+        return;
+      }
+
+      const changes = {};
+      const nameVal = document.querySelector('#newName').value.trim();
+      const factionVal = document.querySelector('#newFaction').value;
+      const seriesVal = document.querySelector('#newSeries').value.trim();
+      const altVal = document.querySelector('#newAltMode').value.trim();
+      const chosenImage = updateBase64Image || document.querySelector('#newImage').value.trim();
+      const wikiVal = document.querySelector('#newWiki').value.trim();
+
+      if (nameVal !== "") changes.name = nameVal;
+      if (factionVal !== "") changes.faction = factionVal;
+      if (seriesVal !== "") changes.series = seriesVal;
+      if (altVal !== "") changes.altMode = altVal;
+      if (chosenImage !== "") changes.image = chosenImage;
+      if (wikiVal !== "") changes.wikiLink = wikiVal;
+
+      const response = await fetch(`/api/items/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(changes)
+      });
+
+      const data = await response.json();
+      document.querySelector('#output12').textContent = JSON.stringify(data, null, 2);
+
+      document.querySelector('#updateFile').value = '';
+      document.querySelector('#updatePreview').style.display = 'none';
+      updateBase64Image = '';
+      loadInventoryTable();
+    });
+
+    // Delete Figure (iss20)
+    document.querySelector('#deleteItem').addEventListener('click', async () => {
+      const id = document.querySelector('#deleteId').value.trim();
+      if (!id) {
+        document.querySelector('#output13').textContent = 'Please enter or select a Figure ID first.';
+        return;
+      }
+
+      const response = await fetch(`/api/items/${id}`, { method: 'DELETE' });
+      const data = await response.json();
+      document.querySelector('#output13').textContent = JSON.stringify(data, null, 2);
+      loadInventoryTable();
+    });
+
+    loadInventoryTable();
+  </script>
+
+</body>
+</html>
